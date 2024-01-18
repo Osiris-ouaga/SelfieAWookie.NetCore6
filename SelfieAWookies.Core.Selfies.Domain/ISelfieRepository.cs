@@ -6,6 +6,8 @@ namespace SelfieAWookies.Core.Selfies.Domain
 {
     public interface ISelfieRepository : IRepository
     {
-        ICollection<Selfie> GetAll();
+        ICollection<Selfie> GetAll(int? wookieId);
+
+        Selfie AddOne(Selfie item);
     }
 }

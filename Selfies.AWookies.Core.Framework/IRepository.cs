@@ -8,6 +8,6 @@ namespace Selfies.AWookies.Core.Framework
 {
     public interface IRepository
     {
-        IUnitOfWork unitOfWork { get; }
+        IUnitOfWork UnitOfWork { get; }
     }
 }

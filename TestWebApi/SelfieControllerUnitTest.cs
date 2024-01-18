@@ -3,6 +3,7 @@ using Moq;
 using SelfieAWookie.NetCore6.Application.DTOs;
 using SelfieAWookie.NetCore6.Controllers;
 using SelfieAWookies.Core.Selfies.Domain;
+using Selfies.AWookies.Core.Framework;
 
 namespace TestWebApi
 {
@@ -12,11 +13,15 @@ namespace TestWebApi
         public void ShouldAddOneSelfie()
         {
             //ARRANGE
-            Selfie selfie = new Selfie();
+            SelfieDto selfie = new SelfieDto();
             var repositoryMock = new Mock<ISelfieRepository>();
+            var unit = new Mock<IUnitOfWork>();
+
+            repositoryMock.Setup(item => item.UnitOfWork).Returns(new Mock<IUnitOfWork>().Object);
+            repositoryMock.Setup(item => item.AddOne(It.IsAny<Selfie>())).Returns(new Selfie() { Id= 4 });
 
             //ACT
-            var controller = new SelfieController(repositoryMock.Object);
+           var controller = new SelfieController(repositoryMock.Object);
             var result =controller.AddOne(selfie);
 
             //ASSERT
@@ -25,6 +30,8 @@ namespace TestWebApi
 
             var addedSelfie = (result as OkObjectResult).Value as SelfieDto;
             Assert.NotNull(addedSelfie);
+
+            Assert.True(addedSelfie.Id >0);
         }
 
         [Fact]
@@ -39,12 +46,12 @@ namespace TestWebApi
 
             var repositoryMock = new Mock<ISelfieRepository>();
 
-            repositoryMock.Setup(item => item.GetAll()).Returns(expectedList);
+            repositoryMock.Setup(item => item.GetAll(It.IsAny<int>())).Returns(expectedList);
 
             var controller = new SelfieController(repositoryMock.Object);
 
             //Act
-            var result = controller.TestAMoi();
+            var result = controller.GetAll(null);
 
             //Assert
             Assert.NotNull(result);
