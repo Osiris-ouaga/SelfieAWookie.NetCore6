@@ -45,7 +45,7 @@ namespace SelfieAWookie.NetCore6.Controllers
 
         public IActionResult AddOne(Selfie selfie)
         {
-            return this.Ok(selfie);
+            return this.Ok(new SelfieDto());
         }
     }
 }
