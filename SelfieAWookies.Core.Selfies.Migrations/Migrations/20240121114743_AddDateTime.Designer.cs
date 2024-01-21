@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SelfieAWookies.Core.Selfies.Infrastructures.Data;
 
@@ -11,9 +12,10 @@ using SelfieAWookies.Core.Selfies.Infrastructures.Data;
 namespace SelfieAWookies.Core.Selfies.Data.Migrations.Migrations
 {
     [DbContext(typeof(SelfiesContext))]
-    partial class SelfiesContextModelSnapshot : ModelSnapshot
+    [Migration("20240121114743_AddDateTime")]
+    partial class AddDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
