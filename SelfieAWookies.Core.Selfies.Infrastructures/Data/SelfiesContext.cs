@@ -32,5 +32,7 @@ namespace SelfieAWookies.Core.Selfies.Infrastructures.Data
         public DbSet<Selfie> Selfies { get; set; }
 
         public DbSet<Wookie> Wookies { get; set; }
+
+        public DbSet<Picture> Pictures { get; set; }
     }
 }

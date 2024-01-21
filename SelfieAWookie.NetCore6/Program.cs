@@ -6,6 +6,9 @@ using SelfieAWookie.NetCore6.ExtensionMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//var factory = new SelfiesContextFactory();
+//var context = factory.CreateDbContext(null);
+
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 // Add services to the container.

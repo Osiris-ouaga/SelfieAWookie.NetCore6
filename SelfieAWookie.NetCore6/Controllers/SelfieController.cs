@@ -70,9 +70,11 @@ namespace SelfieAWookie.NetCore6.Controllers
 
             using var stream = new FileStream(filePath, FileMode.OpenOrCreate);
             await picture.CopyToAsync(stream);
-           
 
-            return this.Ok();
+            var itemFile = this._repository.AddOnePicture(filePath);
+            this._repository.UnitOfWork.SaveChanges();
+
+            return this.Ok(itemFile);
         }
 
 
