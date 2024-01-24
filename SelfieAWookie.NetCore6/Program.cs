@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
+builder.Configuration.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 // Add services to the container.
 
 builder.Services.AddControllers();

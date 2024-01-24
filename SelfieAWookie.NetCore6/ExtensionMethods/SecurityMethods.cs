@@ -32,7 +32,7 @@ namespace SelfieAWookie.NetCore6.ExtensionMethods
                     ValidateAudience = false,
                     ValidateIssuer = false,
                     ValidateActor = false,
-                    ValidateLifetime = false,
+                    ValidateLifetime = true,
                 };
             });
         }
