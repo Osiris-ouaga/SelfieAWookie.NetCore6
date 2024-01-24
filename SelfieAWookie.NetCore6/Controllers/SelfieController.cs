@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SelfieAWookie.NetCore6.Application.DTOs;
+using SelfieAWookie.NetCore6.ExtensionMethods;
 using SelfieAWookies.Core.Selfies.Domain;
 using SelfieAWookies.Core.Selfies.Infrastructures.Data;
 
@@ -9,6 +13,8 @@ namespace SelfieAWookie.NetCore6.Controllers
 {
     [Route("api/V1/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [EnableCors(SecurityMethods.DEFAULT_POLICY)]
     public class SelfieController : ControllerBase
     {
         private readonly ISelfieRepository _repository = null;
@@ -34,6 +40,7 @@ namespace SelfieAWookie.NetCore6.Controllers
             var param = this.Request.Query["wookieId"];
 
             var selfiesList = this._repository.GetAll(wookieId);
+
             var model = selfiesList.Select(item => new SelfieResumeDto()
             {
                 //  Id = item.Id, 

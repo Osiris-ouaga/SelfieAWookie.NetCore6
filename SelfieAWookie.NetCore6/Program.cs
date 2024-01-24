@@ -3,6 +3,8 @@ using SelfieAWookies.Core.Selfies.Domain;
 using SelfieAWookies.Core.Selfies.Infrastructures.Data;
 using SelfieAWookies.Core.Selfies.Infrastructures.Repositories;
 using SelfieAWookie.NetCore6.ExtensionMethods;
+using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<ISelfieRepository, DefaultSelfieRepository>();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCustomSecurity(configuration);
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    //options.SignIn.RequireConfirmedEmail = true;
+}).AddEntityFrameworkStores<SelfiesContext>();
+
 // Add services to the container.
 builder.Services.AddDbContext<SelfiesContext>(options =>
 {
@@ -35,8 +43,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors(SecurityMethods.DEFAULT_POLICY2);
 app.MapControllers();
 
 app.Run();
