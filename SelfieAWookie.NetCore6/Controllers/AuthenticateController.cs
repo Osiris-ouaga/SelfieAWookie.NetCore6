@@ -13,8 +13,8 @@ namespace SelfieAWookie.API.UI.Controllers
     public class AuthenticateController : ControllerBase
     {
         #region Fields
-        private UserManager<IdentityUser> _userManager = null;
-        private IConfiguration _configuration = null;
+        private readonly UserManager<IdentityUser> _userManager ;
+        private readonly IConfiguration _configuration ;
         #endregion
 
         #region Constructors

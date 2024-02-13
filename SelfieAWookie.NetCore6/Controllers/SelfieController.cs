@@ -17,20 +17,14 @@ namespace SelfieAWookie.NetCore6.Controllers
     [EnableCors(SecurityMethods.DEFAULT_POLICY)]
     public class SelfieController : ControllerBase
     {
-        private readonly ISelfieRepository _repository = null;
-        private readonly IWebHostEnvironment _webHostEnvironment = null;
+        private readonly ISelfieRepository _repository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public SelfieController(ISelfieRepository repository, IWebHostEnvironment webHostEnvironment) 
         { 
             this._repository = repository;
             this._webHostEnvironment = webHostEnvironment;
         }
-
-        //[HttpGet]   
-        //public IEnumerable<Selfie> TestAMoi()
-        //{
-        //    return Enumerable.Range(1, 10).Select(item => new Selfie() { id = item });
-        //}
 
         [HttpGet]
         public IActionResult GetAll([FromQuery] int? wookieId)
@@ -53,15 +47,6 @@ namespace SelfieAWookie.NetCore6.Controllers
 
             return this.Ok(model);
         }
-
-        //[Route("photos")]
-        //[HttpPost]
-        //public async Task<IActionResult> AddPicture()
-        //{
-        //   using var stream = new StreamReader(this.Request.Body);
-        //   var content = await stream.ReadToEndAsync();
-        //    return this.Ok();
-        //}
 
         [Route("photos")]
         [HttpPost]
